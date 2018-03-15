@@ -61,7 +61,7 @@ CLI_DEFAULTS = dict(
     uir=None,
     staple=None,
     strict_permissions=False,
-    pref_challs=[],
+    pref_challs=['dns-01'],
     validate_hooks=True,
     directory_hooks=True,
 
@@ -84,7 +84,7 @@ CLI_DEFAULTS = dict(
     config_dir="/etc/letsencrypt",
     work_dir="/var/lib/letsencrypt",
     logs_dir="/var/log/letsencrypt",
-    server="https://acme-v01.api.letsencrypt.org/directory",
+    server="https://acme-v02.api.letsencrypt.org/directory",
 
     # Plugins parsers
     configurator=None,

@@ -156,18 +156,7 @@ when it receives a TLS ClientHello with the SNI extension set to
         return responses
 
     def _verify_ip_logging_ok(self):
-        if not self.conf('public-ip-logging-ok'):
-            cli_flag = '--{0}'.format(self.option_name('public-ip-logging-ok'))
-            msg = ('NOTE: The IP of this machine will be publicly logged as '
-                   "having requested this certificate. If you're running "
-                   'certbot in manual mode on a machine that is not your '
-                   "server, please ensure you're okay with that.\n\n"
-                   'Are you OK with your IP being logged?')
-            display = zope.component.getUtility(interfaces.IDisplay)
-            if display.yesno(msg, cli_flag=cli_flag, force_interactive=True):
-                setattr(self.config, self.dest('public-ip-logging-ok'), True)
-            else:
-                raise errors.PluginError('Must agree to IP logging to proceed')
+        setattr(self.config, self.dest('public-ip-logging-ok'), True)
 
     def _perform_achall_with_script(self, achall):
         env = dict(CERTBOT_DOMAIN=achall.domain,

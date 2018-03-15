@@ -188,41 +188,7 @@ def _handle_identical_cert_request(config, lineage):
     :rtype: `tuple` of `str`
 
     """
-    if not lineage.ensure_deployed():
-        return "reinstall", lineage
-    if renewal.should_renew(config, lineage):
-        return "renew", lineage
-    if config.reinstall:
-        # Set with --reinstall, force an identical certificate to be
-        # reinstalled without further prompting.
-        return "reinstall", lineage
-    question = (
-        "You have an existing certificate that has exactly the same "
-        "domains or certificate name you requested and isn't close to expiry."
-        "{br}(ref: {0}){br}{br}What would you like to do?"
-    ).format(lineage.configfile.filename, br=os.linesep)
-
-    if config.verb == "run":
-        keep_opt = "Attempt to reinstall this existing certificate"
-    elif config.verb == "certonly":
-        keep_opt = "Keep the existing certificate for now"
-    choices = [keep_opt,
-               "Renew & replace the cert (limit ~5 per 7 days)"]
-
-    display = zope.component.getUtility(interfaces.IDisplay)
-    response = display.menu(question, choices,
-                            default=0, force_interactive=True)
-    if response[0] == display_util.CANCEL:
-        # TODO: Add notification related to command-line options for
-        #       skipping the menu for this case.
-        raise errors.Error(
-            "Operation canceled. You may re-run the client.")
-    elif response[1] == 0:
-        return "reinstall", lineage
-    elif response[1] == 1:
-        return "renew", lineage
-    else:
-        assert False, "This is impossible"
+    return "renew", lineage
 
 def _find_lineage_for_domains(config, domains):
     """Determine whether there are duplicated names and how to handle
