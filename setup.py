@@ -26,7 +26,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 init_fn = os.path.join(here, 'certbot', '__init__.py')
 meta = dict(re.findall(r"""__([a-z]+)__ = '([^']+)""", read_file(init_fn)))
 
-readme = read_file(os.path.join(here, 'README.rst'))
+readme = read_file(os.path.join(here, 'README.md'))
 changes = read_file(os.path.join(here, 'CHANGES.rst'))
 version = meta['version']
 
@@ -51,6 +51,7 @@ install_requires = [
     'setuptools',
     'zope.component',
     'zope.interface',
+    'certbot-dns-google>=0.22.0',
 ]
 
 dev_extras = [
