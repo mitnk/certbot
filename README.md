@@ -19,8 +19,9 @@ $ py -m venv ~/.local/share/certbot
 verify install:
 
 ```
-$ sudo ~/.local/share/certbot/bin/certbot certificates
 $ sudo ~/.local/share/certbot/bin/certbot --help
+$ sudo ~/.local/share/certbot/bin/certbot --version  # should be 0.99.xx
+$ sudo ~/.local/share/certbot/bin/certbot certificates
 ```
 
 
